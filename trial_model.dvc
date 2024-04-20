@@ -2,5 +2,4 @@ outs:
 - md5: b778459ec6e9b8750cd03e9d27c5f348.dir
   size: 2301384
   nfiles: 1
-  hash: md5
   path: trial_model

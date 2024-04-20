@@ -2,5 +2,4 @@ outs:
 - md5: 168df5b1103829c05a169eba9d46ef70.dir
   size: 283509045
   nfiles: 8
-  hash: md5
   path: model
