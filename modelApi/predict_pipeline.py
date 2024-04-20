@@ -4,6 +4,7 @@ import numpy as np
 from PIL import Image 
 from io import BytesIO 
 import pickle
+import dvc.api
 
 import tensorflow as tf
 from tensorflow.keras.preprocessing import image
@@ -11,7 +12,7 @@ from tensorflow.keras.preprocessing import image
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 class_names_file = os.path.join(current_dir, "..", "notebook", "class_name.pkl")
-model_dir = os.path.join(current_dir, "..", "model", "2")
+# model_dir = os.path.join(current_dir, "..", "model", "2")
 
 
 
@@ -26,7 +27,15 @@ def prediction(filename):
     img_array = preprocessing(filename)
     img_array = np.expand_dims(img_array, axis=0)
 
-    model = tf.keras.models.load_model(model_dir)
+    model_ver = 2
+    dvc_path = f"model/{model_ver}"
+
+    dagshub_repo = "https://dagshub.com/Keray18/Food_Quality_Inspection"
+
+    with dvc.api.open(f"{dvc_path}/saved_model.pb", repo=dagshub_repo, mode="rb") as f:
+        model = f.read()
+
+    model = tf.keras.models.load_model(model)
     predictions = model.predict(img_array)
     predicted_class_index = np.argmax(predictions[0])
 
