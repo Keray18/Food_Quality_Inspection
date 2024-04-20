@@ -19,9 +19,6 @@ async def predict_image(file: UploadFile = File(...)):
     predicted_class, confidence = prediction(bytes)
     return {"prediction": predicted_class}
 
-    
-
-
 
 
 if __name__ == "__main__":

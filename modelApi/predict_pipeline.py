@@ -27,14 +27,14 @@ def prediction(filename):
     img_array = preprocessing(filename)
     img_array = np.expand_dims(img_array, axis=0)
 
-    dagshub_model_path = f"model/{2}"
+    dagshub_model_path = "trial_model/model.h5"
 
     dagshub_repo = "https://dagshub.com/Keray18/Food_Quality_Inspection"
 
     with dvc.api.open(f"{dagshub_model_path}", repo=dagshub_repo, mode="rb") as f:
-        model = f.read()
+        model = tf.keras.models.load_model(f)
 
-    model = tf.keras.models.load_model(model)
+    
     predictions = model.predict(img_array)
     predicted_class_index = np.argmax(predictions[0])
 
