@@ -27,12 +27,11 @@ def prediction(filename):
     img_array = preprocessing(filename)
     img_array = np.expand_dims(img_array, axis=0)
 
-    model_ver = 2
-    dvc_path = f"model/{model_ver}"
+    dagshub_model_path = f"model/{2}"
 
     dagshub_repo = "https://dagshub.com/Keray18/Food_Quality_Inspection"
 
-    with dvc.api.open(f"{dvc_path}/saved_model.pb", repo=dagshub_repo, mode="rb") as f:
+    with dvc.api.open(f"{dagshub_model_path}", repo=dagshub_repo, mode="rb") as f:
         model = f.read()
 
     model = tf.keras.models.load_model(model)
