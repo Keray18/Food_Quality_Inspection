@@ -39,9 +39,9 @@ async def predict_image(file: UploadFile = File(...)):
         if response.status_code == 200:
             with open(model_file, "wb") as f:
                 f.write(response.content)
-            print("Model downloaded successfully!")  
+            print("Model downloaded successfully!")
         else:
-            print("Failed to download model.") 
+            print("Failed to download model.")
             return {"error": "Model not available"}
 
         model = tf.keras.models.load_model(model_file)
@@ -52,4 +52,4 @@ async def predict_image(file: UploadFile = File(...)):
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host='127.0.0.1', port=8000)
+    uvicorn.run(app, host='localhost', port=8000)
