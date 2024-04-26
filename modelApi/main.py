@@ -1,4 +1,4 @@
-import numpy as np 
+import numpy as np
 import os
 import pathlib
 import pickle
@@ -13,8 +13,14 @@ app = FastAPI()
 
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-class_names_file = os.path.join(current_dir, "..", "notebook", "class_name.pkl")
+class_names_file = os.path.join(
+    current_dir, "..", "notebook", "class_name.pkl")
 model_dir = os.path.join(current_dir, "..", "testing_model", "model.h5")
+
+
+@app.get("/")
+def home():
+    return "X marks the spot."
 
 
 @app.post("/preds")
@@ -28,7 +34,6 @@ async def predict_image(file: UploadFile = File(...)):
 
     predicted_class, confidence = prediction(bytes, model, class_name)
     return {"prediction": predicted_class}
-
 
 
 if __name__ == "__main__":
