@@ -2,6 +2,7 @@ tensorflow
 fastapi
 uvicorn
 python-multipart
+streamlit
 pillow
 matplotlib
 numpy
