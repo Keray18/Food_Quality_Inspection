@@ -4,11 +4,9 @@ import numpy as np
 from PIL import Image
 from io import BytesIO
 import pickle
-import dvc.api
 
 import tensorflow as tf
 from tensorflow.keras.preprocessing import image
-from tensorflow.keras.utils import get_file
 
 
 def preprocessing(filename) -> np.ndarray:
